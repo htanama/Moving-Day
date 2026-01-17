@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://of7lt7m4l0tj"]
+
+[ext_resource type="Script" uid="uid://rmf5uyx2eh8r" path="res://Player/player.gd" id="1_67a6e"]
+[ext_resource type="PackedScene" uid="uid://b2e7x2fgqylow" path="res://Scene/Objects/shadow_dot.tscn" id="2_yic5t"]
+[ext_resource type="PackedScene" uid="uid://c61t3ytggxx" path="res://Scene/Objects/GhostPreview.tscn" id="3_uuj77"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3amdw"]
+radius = 0.4
+height = 1.8
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 4
+script = ExtResource("1_67a6e")
+
+[node name="ShadowDot" parent="." instance=ExtResource("2_yic5t")]
+
+[node name="GhostPreview" parent="." instance=ExtResource("3_uuj77")]
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, -3)
+collision_mask = 3
+
+[node name="HoldPos" type="Marker3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, -1.5)
+
+[node name="DropRay" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, -10, 0)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2500001, 0)
+shape = SubResource("CapsuleShape3D_3amdw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Crosshair" type="ColorRect" parent="CanvasLayer/CenterContainer"]
+custom_minimum_size = Vector2(4, 4)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="DisplayInformation" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7765096, -2.6461775)
+billboard = 1
+text = "Moving Day Declutter!
+"
+font_size = 50
+outline_size = 25
