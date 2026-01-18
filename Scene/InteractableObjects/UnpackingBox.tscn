@@ -107,3 +107,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4331023, 0.9339881, 0.4527
 [node name="UnpackSound" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.32109594, 0)
 stream = ExtResource("9_4cqnn")
+volume_db = -20.0

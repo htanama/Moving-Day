@@ -246,5 +246,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2468815, 0.25, -8.670997)
 [node name="Taco" parent="." instance=ExtResource("18_88gka")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2888446, 1.2782899, -8.548077)
 
-[node name="Cardboard Box Open" parent="." instance=ExtResource("12_2bdd2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11988747, 0.25, -2.092877)
+[node name="UnpackingBox" parent="." instance=ExtResource("12_2bdd2")]
