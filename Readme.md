@@ -9,6 +9,8 @@ Key Technical Features
 
 Precision Handling: Objects are moved using a custom PID-style physics pull system, ensuring they follow the player's hand naturally without clipping through walls.
 
+![Moving-Day items follow player's hand](https://github.com/htanama/Moving-Day/blob/main/Moving-Day-Pic.png)
+
 Dynamic Rotation: 
 Y-Axis Spin: Rotate item to adjust its orientation by holding right mouse button
 90° X-Axis Flip: Use a quick-toggle system to flip items (like cup facing incorrect orientation) with instant response.
@@ -50,6 +52,8 @@ Built With
 
 
 Solving the "Ghost" Overlap Rendering
+
+![Moving-Day fixed Ghost Preview for complex object ](https://github.com/htanama/Moving-Day/blob/main/GhostPreviewBambooSteamer.png)
 
 Challenge: When creating ghosts for complex objects (like a Bamboo Steamer), multiple internal meshes would overlap. Because they were transparent, these overlapping areas appeared darker and messy, breaking the "hologram" look.
 
