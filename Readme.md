@@ -12,7 +12,9 @@ Precision Handling: Objects are moved using a custom PID-style physics pull syst
 ![Moving-Day items follow player's hand](https://github.com/htanama/Moving-Day/blob/main/Moving-Day-Pic.png)
 
 Dynamic Rotation: 
-Y-Axis Spin: Rotate item to adjust its orientation by holding right mouse button
+
+Y-Axis Spin: Rotate item to adjust its orientation by holding right mouse button.
+
 90° X-Axis Flip: Use a quick-toggle system to flip items (like cup facing incorrect orientation) with instant response.
 
 Constraint Management: Objects stay upright and stable while being carried, preventing "physics jitter."
@@ -44,7 +46,7 @@ Smart HUD: A context-sensitive UI system that fades in/out to provide tips (e.g.
 
 Built With
 
-    Engine: Godot 4.x
+    Engine: Godot 4.5.1
 
     Language: C# (.NET 6.0+)
 
