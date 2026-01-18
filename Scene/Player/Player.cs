@@ -7,6 +7,9 @@ public partial class Player : CharacterBody3D
 	[Export] public Material GhostMaterial;
 
 	private AudioStreamPlayer3D _dropSound;
+
+	private HUDManager _hud;
+
 	// --- Constants ---
 	private const float Speed = 5.0f;
 	private const float JumpVelocity = 4.5f;
@@ -34,6 +37,7 @@ public partial class Player : CharacterBody3D
 	public override void _Ready()
 	{
 		// Initializing node references
+		_hud = GetTree().Root.FindChild("HUD", true,false) as HUDManager;
 		_head = GetNode<Node3D>("Head");
 		_camera = GetNode<Camera3D>("Head/Camera3D");
 		_raycast = GetNode<RayCast3D>("Head/Camera3D/RayCast3D");
@@ -283,6 +287,8 @@ public partial class Player : CharacterBody3D
 		if (_pickedObject != null)
 		{
 			if (_crosshair != null) _crosshair.Modulate = Colors.White;
+			_hud.ShowHoldingHints();
+			
 			if (_lastHoveredObject != null)
 			{
 				SetHighlight(_lastHoveredObject, false);
@@ -296,6 +302,8 @@ public partial class Player : CharacterBody3D
 			if (collider is RigidBody3D rb)
 			{
 				if (_crosshair != null) _crosshair.Modulate = Colors.Yellow;
+				// hint to pick up item
+				_hud.ShowPickupHint(rb.Name);
 
 				if (_lastHoveredObject != rb)
 				{
@@ -309,11 +317,13 @@ public partial class Player : CharacterBody3D
 			else
 			{
 				ClearHighlight();
+				_hud.HideAllTips();
 			}
 		}
 		else
 		{
 			ClearHighlight();
+			_hud.HideAllTips();
 		}
 	}
 

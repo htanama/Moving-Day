@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://bbrp50gdnmn2h"]
+[gd_scene load_steps=21 format=3 uid="uid://bbrp50gdnmn2h"]
 
+[ext_resource type="Script" uid="uid://bls4h67xqsly7" path="res://Scene/UI/HUDManager.cs" id="1_5lw76"]
 [ext_resource type="PackedScene" uid="uid://of7lt7m4l0tj" path="res://Scene/Player/player.tscn" id="1_j1kdv"]
 [ext_resource type="PackedScene" uid="uid://dxmfppk5sw4ao" path="res://Scene/HouseBuilding/countertop_b.tscn" id="3_cf13q"]
 [ext_resource type="AudioStream" uid="uid://c55xhh2ln8rbb" path="res://Assets/Music/ClassicallyCozy.wav" id="8_2l1ud"]
@@ -12,6 +13,21 @@
 [ext_resource type="PackedScene" uid="uid://bodrwmttjh5ch" path="res://Scene/HouseholdsItems/stove.tscn" id="16_rireo"]
 [ext_resource type="PackedScene" uid="uid://c5rv0iekxlkh1" path="res://Scene/HouseholdsItems/fridge.tscn" id="17_kli7g"]
 [ext_resource type="PackedScene" uid="uid://co3p88yynoix0" path="res://Scene/InteractableObjects/taco.tscn" id="18_88gka"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2bdd2"]
+font_size = 50
+outline_size = 25
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5lw76"]
+font_size = 50
+outline_size = 25
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xln6g"]
+font_size = 50
+outline_size = 25
+outline_color = Color(0.0013668863, 0.0019815615, 0.002158034, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1kdv"]
 albedo_color = Color(0.7192759, 0.53332144, 0.1711835, 1)
@@ -32,6 +48,48 @@ glow_enabled = true
 [node name="Main" type="Node"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+mouse_filter = 2
+script = ExtResource("1_5lw76")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -653.0
+offset_top = -7.0
+offset_right = 723.0
+offset_bottom = 208.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="PickupTip" type="Label" parent="CanvasLayer/HUD/VBoxContainer"]
+layout_mode = 2
+text = "Click Left Mouse Button to Pick Up "
+label_settings = SubResource("LabelSettings_2bdd2")
+
+[node name="PlaceTip" type="Label" parent="CanvasLayer/HUD/VBoxContainer"]
+layout_mode = 2
+text = "Click Left Mouse Button to Place "
+label_settings = SubResource("LabelSettings_5lw76")
+
+[node name="RotateTip" type="Label" parent="CanvasLayer/HUD/VBoxContainer"]
+layout_mode = 2
+text = "Hold Right Mouse Button And Move the Mouse to Rotate "
+label_settings = SubResource("LabelSettings_xln6g")
 
 [node name="Floor" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0008201599, 0, -0.0016336441)
