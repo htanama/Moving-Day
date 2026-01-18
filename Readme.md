@@ -3,6 +3,8 @@ Moving Day: Relaxing Simulator
 A cozy, physics-based interior decoration and organization simulator built with Godot 4 and C#. 
 Players unpack boxes, manage clutter, and arrange their new home with smooth, tactile 3D interactions.
 
+![Moving-Day items to organize](https://github.com/htanama/Moving-Day/blob/main/Moving-Day-Pic2.png)
+
 Key Technical Features
 
 Precision Handling: Objects are moved using a custom PID-style physics pull system, ensuring they follow the player's hand naturally without clipping through walls.
