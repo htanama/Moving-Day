@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class UnpackingBox : StaticBody3D
+public partial class UnpackingBox : RigidBody3D
 {
 	// In C#, we use [Export] just like @export in GDScript
 	[Export]

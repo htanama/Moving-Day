@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bec02tfl6ubsk" path="res://Scene/HouseBuilding/wall_tiles_kitchen_corner_inner.tscn" id="9_0mf12"]
 [ext_resource type="PackedScene" uid="uid://chuqyjjq35wcw" path="res://Scene/HouseBuilding/wall_tiles_kitchen_straight.tscn" id="10_mbj6f"]
 [ext_resource type="PackedScene" uid="uid://crbpggvuax1nq" path="res://Scene/HouseBuilding/counter_top_sink.tscn" id="11_5cn8n"]
-[ext_resource type="PackedScene" uid="uid://b0m57vvocg4b6" path="res://Scene/InteractableObjects/cardboard_box_open.tscn" id="12_2bdd2"]
+[ext_resource type="PackedScene" uid="uid://b0m57vvocg4b6" path="res://Scene/InteractableObjects/UnpackingBox.tscn" id="12_2bdd2"]
 [ext_resource type="PackedScene" uid="uid://c3homc15wpcsj" path="res://Scene/HouseBuilding/wall_tiles_kitchen_window.tscn" id="13_5lw76"]
 [ext_resource type="PackedScene" uid="uid://4wt50jdyke3r" path="res://Scene/HouseBuilding/wall_tiles_kitchen_door.tscn" id="14_xln6g"]
 [ext_resource type="PackedScene" uid="uid://bodrwmttjh5ch" path="res://Scene/HouseholdsItems/stove.tscn" id="16_rireo"]
@@ -68,10 +68,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -653.0
-offset_top = -7.0
-offset_right = 723.0
-offset_bottom = 208.0
+offset_left = -736.0
+offset_top = -42.0
+offset_right = 669.0
+offset_bottom = 173.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
@@ -88,7 +88,7 @@ label_settings = SubResource("LabelSettings_5lw76")
 
 [node name="RotateTip" type="Label" parent="CanvasLayer/HUD/VBoxContainer"]
 layout_mode = 2
-text = "Hold Right Mouse Button And Move the Mouse to Rotate "
+text = "Hold Right Mouse Button to Rotate And Press G Key to Flip"
 label_settings = SubResource("LabelSettings_xln6g")
 
 [node name="Floor" type="CSGBox3D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://b0m57vvocg4b6"]
+[gd_scene load_steps=19 format=4 uid="uid://b0m57vvocg4b6"]
 
 [ext_resource type="Script" uid="uid://biuxys7w2rr8q" path="res://Scene/InteractableObjects/UnpackingBox.cs" id="1_qlr47"]
 [ext_resource type="PackedScene" uid="uid://da7y2fhfdxyhc" path="res://Scene/InteractableObjects/kettle.tscn" id="2_i4wld"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://dl30tcybjfr11" path="res://Assets/Sounds/fanfare.mp3" id="9_4cqnn"]
 [ext_resource type="PackedScene" uid="uid://b71amaoudns7f" path="res://Scene/InteractableObjects/green_bowl.tscn" id="9_efi5s"]
 [ext_resource type="PackedScene" uid="uid://bo1bpya1pxod1" path="res://Scene/InteractableObjects/bamboo_steamer.tscn" id="10_5loew"]
+[ext_resource type="PackedScene" uid="uid://d1owkusp6bg82" path="res://Scene/InteractableObjects/bottle_ketchup.tscn" id="11_pvp5v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qi7t2"]
 resource_local_to_scene = true
@@ -84,13 +85,13 @@ shadow_mesh = SubResource("ArrayMesh_1fsuh")
 [sub_resource type="BoxShape3D" id="BoxShape3D_qi7t2"]
 size = Vector3(0.8691883, 0.9530544, 0.8664398)
 
-[node name="Cardboard Box Open" type="StaticBody3D"]
+[node name="UnpackingBox" type="RigidBody3D"]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_qlr47")
-Contents = Array[PackedScene]([ExtResource("2_i4wld"), ExtResource("3_jacbp"), ExtResource("4_pmsnm"), ExtResource("5_uvn3o"), ExtResource("6_k26m0"), ExtResource("7_sh62q"), ExtResource("8_mbiaw"), ExtResource("9_efi5s"), ExtResource("10_5loew")])
+Contents = Array[PackedScene]([ExtResource("2_i4wld"), ExtResource("3_jacbp"), ExtResource("4_pmsnm"), ExtResource("5_uvn3o"), ExtResource("6_k26m0"), ExtResource("7_sh62q"), ExtResource("8_mbiaw"), ExtResource("9_efi5s"), ExtResource("10_5loew"), ExtResource("3_jacbp"), ExtResource("3_jacbp"), ExtResource("11_pvp5v")])
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="VisualModel" type="MeshInstance3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 material_overlay = SubResource("StandardMaterial3D_qi7t2")
 mesh = SubResource("ArrayMesh_addnn")

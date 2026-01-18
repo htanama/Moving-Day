@@ -33,7 +33,8 @@ public partial class Player : CharacterBody3D
 	private RigidBody3D _lastHoveredObject = null;
 	private bool _isRotatingObject = false;
 	private float _rotationSpeed = 0.05f;
-	
+	private bool _isTilted = false; // False = 0 deg, True = 90 deg
+	private float _targetTiltX = 0.0f; // Stores the desired X rotation
 	public override void _Ready()
 	{
 		// Initializing node references
@@ -119,7 +120,7 @@ public partial class Player : CharacterBody3D
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
 			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
 		}
-
+		
 		// Take the current local velocity and store it as the new global velocity
 		Velocity = velocity;
 		MoveAndSlide();
@@ -131,12 +132,14 @@ public partial class Player : CharacterBody3D
 			Vector3 currentPos = _pickedObject.GlobalPosition;
 			
 			// Move object toward hand
-			Vector3 velocityVector = (targetPos - currentPos) * _pullPower;
+			Vector3 velocityVector = (targetPos - currentPos) * _pullPower;			
 			_pickedObject.LinearVelocity = velocityVector.LimitLength(25.0f);
-			
-			// Keep object upright
+						
+			// Keep object upright and adding Tilting rotation in X-axis
 			Vector3 currentRot = _pickedObject.GlobalRotation;
-			_pickedObject.GlobalRotation = new Vector3(0, currentRot.Y, 0);
+			//_pickedObject.GlobalRotation = new Vector3(0, currentRot.Y, 0);
+			_pickedObject.GlobalRotation = new Vector3(_targetTiltX, currentRot.Y, 0); // adding Tilting Rotatation in x-axis
+			
 
 			if (_isRotatingObject)
 			{
@@ -197,6 +200,21 @@ public partial class Player : CharacterBody3D
 				DropObject();
 		}
 
+		if (@event.IsActionPressed("toggle_tilt") && _pickedObject != null)
+		{
+			_isTilted = !_isTilted;
+			// Toggle If target is 0, make it 90. Otherwise, make it 0.
+			if (_isTilted)
+			{
+				if (_targetTiltX == 0.0f)
+				{
+					_targetTiltX = Mathf.DegToRad(90);
+				}
+				else
+					_targetTiltX = 0.0f;
+			}
+		}
+
 		if (@event.IsActionPressed("rotate"))
 			_isRotatingObject = true;
 		else if (@event.IsActionReleased("rotate"))
@@ -221,6 +239,7 @@ public partial class Player : CharacterBody3D
 				_pickedObject = rb;
 				_pickedObject.GravityScale = 0.0f;
 				_pickedObject.SetCollisionMaskValue(3, false); // Layer 3 is Player
+			
 
 				// Clear any old ghost parts
 				foreach (Node child in _ghostPreview.GetChildren())
