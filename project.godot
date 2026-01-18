@@ -10,15 +10,20 @@ config_version=5
 
 [application]
 
-config/name="Experimental-Project"
+config/name="Moving-Day"
 run/main_scene="uid://bbrp50gdnmn2h"
-config/features=PackedStringArray("4.5", "Forward Plus")
+config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
+
+[dotnet]
+
+project/assembly_name="Moving-Day"
 
 [file_customization]
 

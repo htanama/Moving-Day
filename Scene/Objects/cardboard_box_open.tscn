@@ -1,4 +1,6 @@
-[gd_scene load_steps=7 format=4 uid="uid://b0m57vvocg4b6"]
+[gd_scene load_steps=8 format=4 uid="uid://b0m57vvocg4b6"]
+
+[ext_resource type="Script" uid="uid://biuxys7w2rr8q" path="res://Scene/Objects/UnpackingBox.cs" id="1_qlr47"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qi7t2"]
 resource_local_to_scene = true
@@ -70,18 +72,22 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_1fsuh")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qi7t2"]
-size = Vector3(1.5275345, 1.5679741, 1.5151062)
+size = Vector3(0.8691883, 0.9530544, 0.8664398)
 
-[node name="Cardboard Box Open" type="RigidBody3D"]
+[node name="Cardboard Box Open" type="StaticBody3D"]
 collision_layer = 2
 collision_mask = 3
+script = ExtResource("1_qlr47")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 0, 0)
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 material_overlay = SubResource("StandardMaterial3D_qi7t2")
 mesh = SubResource("ArrayMesh_addnn")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7598915, 0.76758385, 0.73652405)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43071842, 0.46012402, 0.41219085)
 shape = SubResource("BoxShape3D_qi7t2")
+
+[node name="SpawnPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4331023, 0.9339881, 0.45270237)

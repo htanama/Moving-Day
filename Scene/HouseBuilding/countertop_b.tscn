@@ -46,11 +46,11 @@ size = Vector3(2.0083618, 1.0219727, 1.4750977)
 
 [node name="CountertopB" type="StaticBody3D"]
 
-[node name="countertop_straight_B" type="MeshInstance3D" parent="."]
+[node name="VisualModel" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06568611, 0, 0.08373737)
 mesh = SubResource("ArrayMesh_5kd21")
 skeleton = NodePath("")
 
-[node name="countertop_straight_B2" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.059185863, 0.48902386, 0.05175495)
 shape = SubResource("BoxShape3D_qmnnl")

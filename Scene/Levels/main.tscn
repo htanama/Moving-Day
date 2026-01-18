@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bbrp50gdnmn2h"]
+[gd_scene load_steps=23 format=3 uid="uid://bbrp50gdnmn2h"]
 
 [ext_resource type="PackedScene" uid="uid://of7lt7m4l0tj" path="res://Scene/Player/player.tscn" id="1_j1kdv"]
 [ext_resource type="PackedScene" uid="uid://da7y2fhfdxyhc" path="res://Scene/Objects/kettle.tscn" id="2_qw6db"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://c4ijtei7tj5c3" path="res://Scene/Objects/white_wine.tscn" id="15_msam1"]
 [ext_resource type="PackedScene" uid="uid://bodrwmttjh5ch" path="res://Scene/Objects/stove.tscn" id="16_rireo"]
 [ext_resource type="PackedScene" uid="uid://c5rv0iekxlkh1" path="res://Scene/Objects/fridge.tscn" id="17_kli7g"]
+[ext_resource type="PackedScene" uid="uid://co3p88yynoix0" path="res://Scene/Objects/taco.tscn" id="18_88gka"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1kdv"]
 albedo_color = Color(0.7192759, 0.53332144, 0.1711835, 1)
@@ -170,12 +171,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9234552, 0.2640686, -8.8691
 [node name="CountertopB4" parent="." instance=ExtResource("3_cf13q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.98084, 0.2719624, -8.948264)
 
-[node name="Cardboard Box Open" parent="." instance=ExtResource("12_2bdd2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5952542, 1.2594754, -5.1248465)
-
-[node name="Cardboard Box Open2" parent="." instance=ExtResource("12_2bdd2")]
-transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, -3.7501445, 1.9734848, -0.4588011)
-
 [node name="wall_tiles_kitchen_window" parent="." instance=ExtResource("13_5lw76")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8820124, 0.25903332, -9.848097)
 
@@ -189,22 +184,22 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 9.74
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9369842, 0.3014872, 9.636669)
 
 [node name="Kettle2" parent="." instance=ExtResource("2_qw6db")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0427697, 0.23806465, 0.6706709)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2407217, 2.2126398, 0.6706709)
 
 [node name="RedPan" parent="." instance=ExtResource("7_xbdwt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0054789, 0.26906598, 0.13268948)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6613665, 2.5380554, 0.13268948)
 
 [node name="Toaster" parent="." instance=ExtResource("4_bgx1w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1238511, 0.24986279, -0.9745847)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3555064, 1.9760145, -0.9745847)
 
 [node name="RedMug2" parent="." instance=ExtResource("5_j1kdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5942991, 0.38022614, -2.0202177)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4913054, 2.1069026, -0.34993935)
 
 [node name="RedMug" parent="." instance=ExtResource("5_j1kdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9098077, 0.2522601, -0.10558958)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5969043, 2.3677824, -0.10558958)
 
 [node name="CuttingBoard" parent="." instance=ExtResource("6_tgwy5")]
-transform = Transform3D(1, 0, 0, 0, 0.9999775, 0.0067020142, 0, -0.0067020142, 0.9999775, -1.8976089, 0.26409936, -1.8886395)
+transform = Transform3D(1, 0, 0, 0, 0.9999775, 0.0067020142, 0, -0.0067020142, 0.9999775, -2.6093788, 1.9093039, 0.6108465)
 
 [node name="Kettle3" parent="." instance=ExtResource("2_qw6db")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.327754, 1.5632058, -4.2119513)
@@ -225,10 +220,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6977725, 1.3184001, -4.864
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5074396, 1.4828837, -4.468507)
 
 [node name="WhiteWine" parent="." instance=ExtResource("15_msam1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5498965, 0.27159977, -3.3019166)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5498965, 1.647394, -3.3019166)
 
 [node name="Stove" parent="." instance=ExtResource("16_rireo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.081298, 0.34095764, -8.706291)
 
 [node name="Fridge" parent="." instance=ExtResource("17_kli7g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2468815, 0.25, -8.670997)
+
+[node name="Taco" parent="." instance=ExtResource("18_88gka")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2888446, 1.2782899, -8.548077)
+
+[node name="Cardboard Box Open" parent="." instance=ExtResource("12_2bdd2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.475701, 0.25, -0.070868015)
