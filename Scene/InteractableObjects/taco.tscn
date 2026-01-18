@@ -54,11 +54,11 @@ size = Vector3(0.4428711, 0.26769257, 0.17041016)
 collision_layer = 2
 collision_mask = 3
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="VisualModel" type="MeshInstance3D" parent="."]
 material_overlay = SubResource("StandardMaterial3D_8mv1r")
 mesh = SubResource("ArrayMesh_gmvr7")
 skeleton = NodePath("")
 
-[node name="Node3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010986328, 0.12752914, -0.024169922)
 shape = SubResource("BoxShape3D_1dj84")

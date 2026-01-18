@@ -1,23 +1,17 @@
-[gd_scene load_steps=23 format=3 uid="uid://bbrp50gdnmn2h"]
+[gd_scene load_steps=17 format=3 uid="uid://bbrp50gdnmn2h"]
 
 [ext_resource type="PackedScene" uid="uid://of7lt7m4l0tj" path="res://Scene/Player/player.tscn" id="1_j1kdv"]
-[ext_resource type="PackedScene" uid="uid://da7y2fhfdxyhc" path="res://Scene/Objects/kettle.tscn" id="2_qw6db"]
 [ext_resource type="PackedScene" uid="uid://dxmfppk5sw4ao" path="res://Scene/HouseBuilding/countertop_b.tscn" id="3_cf13q"]
-[ext_resource type="PackedScene" uid="uid://fss4fdqhr0n3" path="res://Scene/Objects/toaster.tscn" id="4_bgx1w"]
-[ext_resource type="PackedScene" uid="uid://dkxajd1yxcc8r" path="res://Scene/Objects/red_mug.tscn" id="5_j1kdv"]
-[ext_resource type="PackedScene" uid="uid://cvxdulhnebxnn" path="res://Scene/Objects/cutting_board.tscn" id="6_tgwy5"]
-[ext_resource type="PackedScene" uid="uid://dfh0qp1y6j65w" path="res://Scene/Objects/red_pan.tscn" id="7_xbdwt"]
 [ext_resource type="AudioStream" uid="uid://c55xhh2ln8rbb" path="res://Assets/Music/ClassicallyCozy.wav" id="8_2l1ud"]
 [ext_resource type="PackedScene" uid="uid://bec02tfl6ubsk" path="res://Scene/HouseBuilding/wall_tiles_kitchen_corner_inner.tscn" id="9_0mf12"]
 [ext_resource type="PackedScene" uid="uid://chuqyjjq35wcw" path="res://Scene/HouseBuilding/wall_tiles_kitchen_straight.tscn" id="10_mbj6f"]
 [ext_resource type="PackedScene" uid="uid://crbpggvuax1nq" path="res://Scene/HouseBuilding/counter_top_sink.tscn" id="11_5cn8n"]
-[ext_resource type="PackedScene" uid="uid://b0m57vvocg4b6" path="res://Scene/Objects/cardboard_box_open.tscn" id="12_2bdd2"]
+[ext_resource type="PackedScene" uid="uid://b0m57vvocg4b6" path="res://Scene/InteractableObjects/cardboard_box_open.tscn" id="12_2bdd2"]
 [ext_resource type="PackedScene" uid="uid://c3homc15wpcsj" path="res://Scene/HouseBuilding/wall_tiles_kitchen_window.tscn" id="13_5lw76"]
 [ext_resource type="PackedScene" uid="uid://4wt50jdyke3r" path="res://Scene/HouseBuilding/wall_tiles_kitchen_door.tscn" id="14_xln6g"]
-[ext_resource type="PackedScene" uid="uid://c4ijtei7tj5c3" path="res://Scene/Objects/white_wine.tscn" id="15_msam1"]
-[ext_resource type="PackedScene" uid="uid://bodrwmttjh5ch" path="res://Scene/Objects/stove.tscn" id="16_rireo"]
-[ext_resource type="PackedScene" uid="uid://c5rv0iekxlkh1" path="res://Scene/Objects/fridge.tscn" id="17_kli7g"]
-[ext_resource type="PackedScene" uid="uid://co3p88yynoix0" path="res://Scene/Objects/taco.tscn" id="18_88gka"]
+[ext_resource type="PackedScene" uid="uid://bodrwmttjh5ch" path="res://Scene/HouseholdsItems/stove.tscn" id="16_rireo"]
+[ext_resource type="PackedScene" uid="uid://c5rv0iekxlkh1" path="res://Scene/HouseholdsItems/fridge.tscn" id="17_kli7g"]
+[ext_resource type="PackedScene" uid="uid://co3p88yynoix0" path="res://Scene/InteractableObjects/taco.tscn" id="18_88gka"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1kdv"]
 albedo_color = Color(0.7192759, 0.53332144, 0.1711835, 1)
@@ -36,6 +30,8 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="Main" type="Node"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Floor" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0008201599, 0, -0.0016336441)
@@ -64,7 +60,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9959023, 0.27196258, -8.86
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_2l1ud")
-volume_db = -10.0
+volume_db = -30.0
 autoplay = true
 
 [node name="HouseBuilding" type="Node" parent="."]
@@ -183,45 +179,6 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 9.74
 [node name="wall_tiles_kitchen_door" parent="." instance=ExtResource("14_xln6g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9369842, 0.3014872, 9.636669)
 
-[node name="Kettle2" parent="." instance=ExtResource("2_qw6db")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2407217, 2.2126398, 0.6706709)
-
-[node name="RedPan" parent="." instance=ExtResource("7_xbdwt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6613665, 2.5380554, 0.13268948)
-
-[node name="Toaster" parent="." instance=ExtResource("4_bgx1w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3555064, 1.9760145, -0.9745847)
-
-[node name="RedMug2" parent="." instance=ExtResource("5_j1kdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4913054, 2.1069026, -0.34993935)
-
-[node name="RedMug" parent="." instance=ExtResource("5_j1kdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5969043, 2.3677824, -0.10558958)
-
-[node name="CuttingBoard" parent="." instance=ExtResource("6_tgwy5")]
-transform = Transform3D(1, 0, 0, 0, 0.9999775, 0.0067020142, 0, -0.0067020142, 0.9999775, -2.6093788, 1.9093039, 0.6108465)
-
-[node name="Kettle3" parent="." instance=ExtResource("2_qw6db")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.327754, 1.5632058, -4.2119513)
-
-[node name="RedPan2" parent="." instance=ExtResource("7_xbdwt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.019923, 1.403736, -4.593387)
-
-[node name="Toaster2" parent="." instance=ExtResource("4_bgx1w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.400572, 1.1156954, -2.9985435)
-
-[node name="RedMug3" parent="." instance=ExtResource("5_j1kdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4284534, 1.5708532, -4.9267387)
-
-[node name="RedMug4" parent="." instance=ExtResource("5_j1kdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6977725, 1.3184001, -4.8648496)
-
-[node name="CuttingBoard2" parent="." instance=ExtResource("6_tgwy5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5074396, 1.4828837, -4.468507)
-
-[node name="WhiteWine" parent="." instance=ExtResource("15_msam1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5498965, 1.647394, -3.3019166)
-
 [node name="Stove" parent="." instance=ExtResource("16_rireo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.081298, 0.34095764, -8.706291)
 
@@ -232,4 +189,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2468815, 0.25, -8.670997)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2888446, 1.2782899, -8.548077)
 
 [node name="Cardboard Box Open" parent="." instance=ExtResource("12_2bdd2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.475701, 0.25, -0.070868015)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11988747, 0.25, -2.092877)

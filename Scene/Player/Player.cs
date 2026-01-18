@@ -1,8 +1,12 @@
 using Godot;
 using System;
 
+
 public partial class Player : CharacterBody3D
 {
+	[Export] public Material GhostMaterial;
+
+	private AudioStreamPlayer3D _dropSound;
 	// --- Constants ---
 	private const float Speed = 5.0f;
 	private const float JumpVelocity = 4.5f;
@@ -15,7 +19,7 @@ public partial class Player : CharacterBody3D
 	private Marker3D _holdPos;
 	private Node3D _shadowDot;
 	private RayCast3D _dropRay;
-	private MeshInstance3D _ghostPreview;
+	private Node3D _ghostPreview;
 	private Label3D _displayInformation;
 	private Control _crosshair; // Changed to Control to cover various UI types
 
@@ -26,7 +30,7 @@ public partial class Player : CharacterBody3D
 	private RigidBody3D _lastHoveredObject = null;
 	private bool _isRotatingObject = false;
 	private float _rotationSpeed = 0.05f;
-
+	
 	public override void _Ready()
 	{
 		// Initializing node references
@@ -36,9 +40,10 @@ public partial class Player : CharacterBody3D
 		_holdPos = GetNode<Marker3D>("Head/Camera3D/HoldPos");
 		_shadowDot = GetNode<Node3D>("ShadowDot");
 		_dropRay = GetNode<RayCast3D>("Head/Camera3D/DropRay");
-		_ghostPreview = GetNode<MeshInstance3D>("GhostPreview");
+		_ghostPreview = GetNode<Node3D>("GhostPreview");
 		_displayInformation = GetNode<Label3D>("DisplayInformation");
 		_crosshair = GetNode<Control>("CanvasLayer/CenterContainer/Crosshair");
+		_dropSound = GetNode<AudioStreamPlayer3D>("Head/Camera3D/DropSound");
 
 		DisplayInformation();
 		Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -55,7 +60,7 @@ public partial class Player : CharacterBody3D
 		_displayInformation.Visible = true;
 		// await the timer timeout
 		await ToSignal(GetTree().CreateTimer(5.0), SceneTreeTimer.SignalName.Timeout);
-		_displayInformation.Visible = false;
+		_displayInformation.Visible = false;	
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -111,6 +116,7 @@ public partial class Player : CharacterBody3D
 			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
 		}
 
+		// Take the current local velocity and store it as the new global velocity
 		Velocity = velocity;
 		MoveAndSlide();
 
@@ -198,18 +204,42 @@ public partial class Player : CharacterBody3D
 		if (_raycast.IsColliding())
 		{
 			var collider = _raycast.GetCollider();
+
+			// Check for Box: can we open it?
+			if (collider is UnpackingBox box)
+			{
+				box.OpenBox();
+			}
+
+
 			if (collider is RigidBody3D rb)
 			{
 				_pickedObject = rb;
 				_pickedObject.GravityScale = 0.0f;
 				_pickedObject.SetCollisionMaskValue(3, false); // Layer 3 is Player
 
-				var mesh = _pickedObject.FindChild("*MeshInstance3D*", true) as MeshInstance3D;
-				if (mesh != null)
+				// Clear any old ghost parts
+				foreach (Node child in _ghostPreview.GetChildren())
 				{
-					_ghostPreview.Mesh = mesh.Mesh;
-					_ghostPreview.Scale = mesh.Scale;
+					child.QueueFree();
 				}
+
+				var meshes = _pickedObject.FindChildren("*", "MeshInstance3D", true);
+				foreach (Node node in meshes)
+					if (node is MeshInstance3D originalMesh)
+					{
+						// Skip hidden parts to keep the ghost bright and clean
+						if (!originalMesh.Visible) continue;
+
+						MeshInstance3D ghostPart = (MeshInstance3D)originalMesh.Duplicate();
+						_ghostPreview.AddChild(ghostPart);
+						// Keep the ghost part in the same local position ---
+						ghostPart.Transform = originalMesh.Transform;
+						// Clear highlight
+						ghostPart.MaterialOverlay = null;
+						// Make it blue/transparent
+						ghostPart.MaterialOverride = GhostMaterial;
+					}
 			}
 		}
 	}
@@ -218,6 +248,14 @@ public partial class Player : CharacterBody3D
 	{
 		if (_pickedObject != null)
 		{
+			// Play the sound immediately when the button is pressed
+			if (_dropSound != null)
+			{
+				// Subtle pitch variation makes it sound less robotic
+				_dropSound.PitchScale = (float)GD.RandRange(0.9f, 1.1f);
+				_dropSound.Play();
+			}
+			
 			if (_dropRay.IsColliding())
 			{
 				Vector3 hitPos = _dropRay.GetCollisionPoint();
@@ -228,13 +266,14 @@ public partial class Player : CharacterBody3D
 				_pickedObject.GlobalRotation = new Vector3(0, currentRot.Y, 0);
 			}
 
+			// Reset physics properties
 			_pickedObject.SetCollisionMaskValue(3, true);
 			_pickedObject.GravityScale = 1.0f;
 			_pickedObject.LinearVelocity = Vector3.Zero;
 			_pickedObject.AngularVelocity = Vector3.Zero;
 
-			_ghostPreview.Visible = false;
-			_ghostPreview.Mesh = null;
+			// Cleanup visuals
+			_ghostPreview.Visible = false;			
 			_pickedObject = null;
 		}
 	}
@@ -290,12 +329,23 @@ public partial class Player : CharacterBody3D
 
 	private void SetHighlight(RigidBody3D obj, bool enabled)
 	{
-		var mesh = obj.FindChild("*MeshInstance3D*", true) as MeshInstance3D;
-		if (mesh != null && mesh.MaterialOverlay is StandardMaterial3D overlay)
+		if (obj == null) return;
+
+		// This finds ALL MeshInstance3Ds attached to this RigidBody
+		var allMeshes = obj.FindChildren("*", "MeshInstance3D", true);
+
+		foreach (Node node in allMeshes)
 		{
-			Color color = overlay.AlbedoColor;
-			color.A = enabled ? 1.0f : 0.0f;
-			overlay.AlbedoColor = color;
+			if (node is MeshInstance3D mesh)
+			{
+				// Check if the mesh has the "Material Overlay" slot filled in the Inspector
+				if (mesh.MaterialOverlay is StandardMaterial3D overlay)
+				{
+					Color color = overlay.AlbedoColor;
+					color.A = enabled ? 1.0f : 0.0f; // 1.0 is visible, 0.0 is invisible
+					overlay.AlbedoColor = color;
+				}
+			}
 		}
 	}
 }

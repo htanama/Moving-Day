@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=4 uid="uid://cvxdulhnebxnn"]
 
-[ext_resource type="Texture2D" uid="uid://g1i80ons83v3" path="res://Assets/TinyCharmKitchen/gltf/tiny_treats_texture_1.png" id="1_y1qaw"]
+[ext_resource type="Texture2D" uid="uid://g1i80ons83v3" path="res://Assets/TinyCharmKitchen/gltf/tiny_treats_texture_1.png" id="1_uj1l8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y1qaw"]
 transparency = 1
@@ -8,7 +8,7 @@ albedo_color = Color(1, 1, 0, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ndi4c"]
 resource_name = "tiny_treats_1"
-albedo_texture = ExtResource("1_y1qaw")
+albedo_texture = ExtResource("1_uj1l8")
 roughness = 0.5
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_nriwr"]
@@ -52,7 +52,7 @@ size = Vector3(0.97802734, 0.12884521, 0.69677734)
 collision_layer = 2
 collision_mask = 3
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="VisualModel" type="MeshInstance3D" parent="."]
 layers = 2
 material_overlay = SubResource("StandardMaterial3D_y1qaw")
 mesh = SubResource("ArrayMesh_ypehb")

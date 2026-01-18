@@ -12,11 +12,13 @@ public partial class UnpackingBox : StaticBody3D
 	
 	private bool _isOpened = false;
 	private Marker3D _spawnPoint;
+	private AudioStreamPlayer3D _audioPlayer;
 
 	public override void _Ready()
 	{
 		// Get the spawn point node we created in the scene
 		_spawnPoint = GetNode<Marker3D>("SpawnPoint");
+		_audioPlayer = GetNode<AudioStreamPlayer3D>("UnpackSound");
 	}
 
 	// This is the function your Player script will call
@@ -25,6 +27,13 @@ public partial class UnpackingBox : StaticBody3D
 		if (_isOpened || Contents.Count == 0) return;
 
 		_isOpened = true;
+		if(_audioPlayer != null)
+		{
+			// Randomize pitch between 0.9 (lower) and 1.1 (higher)
+			_audioPlayer.PitchScale = (float)GD.RandRange(0.9,1.1);
+			_audioPlayer.Play();
+		}
+
 		GD.Print("Unpacking box...");
 
 		// Loop through each PackedScene in our list

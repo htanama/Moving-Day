@@ -17,7 +17,7 @@ radius = 0.2
 [node name="Jar" type="RigidBody3D"]
 collision_layer = 2
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="VisualModel" type="MeshInstance3D" parent="."]
 layers = 2
 material_overlay = SubResource("StandardMaterial3D_4mcem")
 mesh = SubResource("CylinderMesh_0nq16")

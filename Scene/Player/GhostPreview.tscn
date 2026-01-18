@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://c61t3ytggxx"]
+
+[node name="GhostPreview" type="Node3D"]
