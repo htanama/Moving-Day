@@ -1,18 +1,21 @@
-[gd_scene load_steps=21 format=3 uid="uid://bbrp50gdnmn2h"]
+[gd_scene load_steps=30 format=3 uid="uid://bbrp50gdnmn2h"]
 
 [ext_resource type="Script" uid="uid://bls4h67xqsly7" path="res://Scene/UI/HUDManager.cs" id="1_5lw76"]
 [ext_resource type="PackedScene" uid="uid://of7lt7m4l0tj" path="res://Scene/Player/player.tscn" id="1_j1kdv"]
+[ext_resource type="Texture2D" uid="uid://dl5472lncicgl" path="res://Assets/Image/yellow-star.png" id="2_rireo"]
 [ext_resource type="PackedScene" uid="uid://dxmfppk5sw4ao" path="res://Scene/HouseBuilding/countertop_b.tscn" id="3_cf13q"]
 [ext_resource type="AudioStream" uid="uid://c55xhh2ln8rbb" path="res://Assets/Music/ClassicallyCozy.wav" id="8_2l1ud"]
 [ext_resource type="PackedScene" uid="uid://bec02tfl6ubsk" path="res://Scene/HouseBuilding/wall_tiles_kitchen_corner_inner.tscn" id="9_0mf12"]
 [ext_resource type="PackedScene" uid="uid://chuqyjjq35wcw" path="res://Scene/HouseBuilding/wall_tiles_kitchen_straight.tscn" id="10_mbj6f"]
 [ext_resource type="PackedScene" uid="uid://crbpggvuax1nq" path="res://Scene/HouseBuilding/counter_top_sink.tscn" id="11_5cn8n"]
+[ext_resource type="Script" uid="uid://c8gdhuta1mc2t" path="res://Scene/Scripts/PlacementZone.cs" id="11_xln6g"]
 [ext_resource type="PackedScene" uid="uid://b0m57vvocg4b6" path="res://Scene/InteractableObjects/UnpackingBox.tscn" id="12_2bdd2"]
+[ext_resource type="PackedScene" uid="uid://d1ulvfj4oq2f0" path="res://Scene/HouseholdsItems/kitchen_blinds.tscn" id="12_5lw76"]
+[ext_resource type="AudioStream" uid="uid://b117vitvqf3b5" path="res://Assets/Sounds/positive_beeps.mp3" id="12_msam1"]
 [ext_resource type="PackedScene" uid="uid://c3homc15wpcsj" path="res://Scene/HouseBuilding/wall_tiles_kitchen_window.tscn" id="13_5lw76"]
 [ext_resource type="PackedScene" uid="uid://4wt50jdyke3r" path="res://Scene/HouseBuilding/wall_tiles_kitchen_door.tscn" id="14_xln6g"]
 [ext_resource type="PackedScene" uid="uid://bodrwmttjh5ch" path="res://Scene/HouseholdsItems/stove.tscn" id="16_rireo"]
 [ext_resource type="PackedScene" uid="uid://c5rv0iekxlkh1" path="res://Scene/HouseholdsItems/fridge.tscn" id="17_kli7g"]
-[ext_resource type="PackedScene" uid="uid://co3p88yynoix0" path="res://Scene/InteractableObjects/taco.tscn" id="18_88gka"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2bdd2"]
 font_size = 50
@@ -28,6 +31,19 @@ outline_color = Color(0, 0, 0, 1)
 font_size = 50
 outline_size = 25
 outline_color = Color(0.0013668863, 0.0019815615, 0.002158034, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_msam1"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, 1, 0)
+initial_velocity_min = 400.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rireo"]
+font_size = 50
+font_color = Color(0, 1, 0, 1)
+outline_size = 25
+outline_color = Color(0, 0, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1kdv"]
 albedo_color = Color(0.7192759, 0.53332144, 0.1711835, 1)
@@ -45,35 +61,45 @@ sky = SubResource("Sky_r34rm")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_5lw76"]
+size = Vector3(14.019653, 0.4169922, 1.5062256)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xln6g"]
+emission_shape_offset = Vector3(0, 1, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rireo"]
+albedo_texture = ExtResource("2_rireo")
+
+[sub_resource type="QuadMesh" id="QuadMesh_kli7g"]
+material = SubResource("StandardMaterial3D_rireo")
+
 [node name="Main" type="Node"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 2
 script = ExtResource("1_5lw76")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -736.0
-offset_top = -42.0
-offset_right = 669.0
-offset_bottom = 173.0
-grow_horizontal = 2
-grow_vertical = 0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -867.0
+offset_bottom = 287.0
+grow_horizontal = 0
 mouse_filter = 2
 
 [node name="PickupTip" type="Label" parent="CanvasLayer/HUD/VBoxContainer"]
@@ -88,8 +114,25 @@ label_settings = SubResource("LabelSettings_5lw76")
 
 [node name="RotateTip" type="Label" parent="CanvasLayer/HUD/VBoxContainer"]
 layout_mode = 2
-text = "Hold Right Mouse Button to Rotate And Press G Key to Flip"
+text = "Hold Right Mouse Button to Rotate  
+Press G Key to Flip"
 label_settings = SubResource("LabelSettings_xln6g")
+
+[node name="ScreenStars" type="GPUParticles2D" parent="CanvasLayer/HUD"]
+position = Vector2(16, 461)
+emitting = false
+amount = 10
+texture = ExtResource("2_rireo")
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_msam1")
+
+[node name="CheckListContainer" type="VBoxContainer" parent="CanvasLayer/HUD"]
+layout_mode = 1
+mouse_filter = 2
+
+[node name="MyChecklistLabel" type="Label" parent="CanvasLayer/HUD/CheckListContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_rireo")
 
 [node name="Floor" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0008201599, 0, -0.0016336441)
@@ -101,20 +144,11 @@ size = Vector3(20, 0.5, 20)
 environment = SubResource("Environment_2wwxx")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Floor"]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+transform = Transform3D(0.78043056, -0.5414759, 0.31262118, 2.7159345e-08, 0.49999997, 0.86602545, -0.62524253, -0.6758727, 0.39021525, 0, 4.410407, 0)
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_j1kdv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.962578)
-
-[node name="CountertopB" parent="." instance=ExtResource("3_cf13q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.27196246, -8.923424)
-
-[node name="CountertopB3" parent="." instance=ExtResource("3_cf13q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0041805506, 0.27196246, -8.897473)
-
-[node name="CountertopB2" parent="." instance=ExtResource("3_cf13q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9959023, 0.27196258, -8.866396)
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_2l1ud")
@@ -130,13 +164,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.722017, 0.2611717, -9.7353
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.736818, 0.2611717, 9.710717)
 
 [node name="wall_tiles_kitchen_corner_inner3" parent="HouseBuilding" instance=ExtResource("9_0mf12")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 9.76599, 0.25, -9.747759)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 9.76599, 0.25, -9.777259)
 
 [node name="wall_tiles_kitchen_corner_inner4" parent="HouseBuilding" instance=ExtResource("9_0mf12")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 9.744812, 0.24999988, 9.744378)
 
 [node name="wall_tiles_kitchen_straight" parent="HouseBuilding" instance=ExtResource("10_mbj6f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.0421867, 0.25, -9.789135)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9722905, 0.25, -9.77828)
 
 [node name="wall_tiles_kitchen_straight2" parent="HouseBuilding" instance=ExtResource("10_mbj6f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0336533, 0.25, -9.773127)
@@ -219,31 +253,68 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 9.76
 [node name="wall_tiles_kitchen_straight3" parent="HouseBuilding" instance=ExtResource("10_mbj6f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7227955, 0.27050793, -9.75602)
 
-[node name="CounterTopSink" parent="." instance=ExtResource("11_5cn8n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9234552, 0.2640686, -8.869148)
+[node name="wall_tiles_kitchen_window" parent="HouseBuilding" instance=ExtResource("13_5lw76")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8820124, 0.25903332, -9.765058)
 
-[node name="CountertopB4" parent="." instance=ExtResource("3_cf13q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.98084, 0.2719624, -8.948264)
+[node name="wall_tiles_kitchen_window3" parent="HouseBuilding" instance=ExtResource("13_5lw76")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0869541, 0.25903332, -9.770661)
 
-[node name="wall_tiles_kitchen_window" parent="." instance=ExtResource("13_5lw76")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8820124, 0.25903332, -9.848097)
-
-[node name="wall_tiles_kitchen_window3" parent="." instance=ExtResource("13_5lw76")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0869541, 0.25903332, -9.848097)
-
-[node name="wall_tiles_kitchen_window2" parent="." instance=ExtResource("13_5lw76")]
+[node name="wall_tiles_kitchen_window2" parent="HouseBuilding" instance=ExtResource("13_5lw76")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 9.7497425, 0.25000012, -3.2028804)
 
-[node name="wall_tiles_kitchen_door" parent="." instance=ExtResource("14_xln6g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9369842, 0.3014872, 9.636669)
+[node name="wall_tiles_kitchen_door" parent="HouseBuilding" instance=ExtResource("14_xln6g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9369842, 0.258182, 9.636669)
 
-[node name="Stove" parent="." instance=ExtResource("16_rireo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.081298, 0.34095764, -8.706291)
+[node name="Fridge" parent="HouseBuilding" instance=ExtResource("17_kli7g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.288815, 0.25, -8.670997)
 
-[node name="Fridge" parent="." instance=ExtResource("17_kli7g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2468815, 0.25, -8.670997)
-
-[node name="Taco" parent="." instance=ExtResource("18_88gka")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2888446, 1.2782899, -8.548077)
+[node name="KitchenBlinds" parent="HouseBuilding" instance=ExtResource("12_5lw76")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0768096, 3.2278192, -9.625709)
 
 [node name="UnpackingBox" parent="." instance=ExtResource("12_2bdd2")]
+
+[node name="PlacementArea" type="Area3D" parent="." node_paths=PackedStringArray("MyChecklistLabel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87984276, -10.00636)
+collision_mask = 3
+script = ExtResource("11_xln6g")
+MyChecklistLabel = NodePath("../CanvasLayer/HUD/CheckListContainer/MyChecklistLabel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlacementArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9208369, 0.35500968, 1.2096205)
+shape = SubResource("BoxShape3D_5lw76")
+debug_color = Color(0, 0, 0, 0.41960785)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="PlacementArea"]
+transform = Transform3D(1, 0, 0, 0, 0.9986649, 0.051656198, 0, -0.051656198, 0.9986649, -3.375247, 0.074647784, 1.6646652)
+emitting = false
+amount = 10
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_xln6g")
+draw_pass_1 = SubResource("QuadMesh_kli7g")
+
+[node name="VictorySound" type="AudioStreamPlayer3D" parent="PlacementArea"]
+stream = ExtResource("12_msam1")
+volume_db = -10.0
+
+[node name="ItemsPlacement" type="Node3D" parent="."]
+
+[node name="Stove" parent="ItemsPlacement" instance=ExtResource("16_rireo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.081298, 0.34095764, -8.706291)
+
+[node name="CountertopB" parent="ItemsPlacement" instance=ExtResource("3_cf13q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0029724, 0.2719624, -8.900584)
+
+[node name="CountertopB3" parent="ItemsPlacement" instance=ExtResource("3_cf13q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0041805506, 0.27196246, -8.897473)
+
+[node name="CountertopB2" parent="ItemsPlacement" instance=ExtResource("3_cf13q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9959023, 0.2719624, -8.904163)
+
+[node name="CounterTopSink" parent="ItemsPlacement" instance=ExtResource("11_5cn8n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9234552, 0.27176875, -8.816562)
+
+[node name="CountertopB4" parent="ItemsPlacement" instance=ExtResource("3_cf13q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9888973, 0.27194238, -8.900875)
+
+[node name="CountertopB5" parent="ItemsPlacement" instance=ExtResource("3_cf13q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.975231, 0.27194238, -8.900875)

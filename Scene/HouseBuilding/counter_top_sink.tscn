@@ -42,7 +42,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_vj2xk")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i0d58"]
-size = Vector3(2.0343933, 1.0712433, 1.4747925)
+size = Vector3(2.0343933, 1.0088997, 1.4747925)
 
 [node name="CounterTopSink" type="StaticBody3D"]
 
@@ -51,5 +51,5 @@ mesh = SubResource("ArrayMesh_w8d4w")
 skeleton = NodePath("")
 
 [node name="countertop_sink2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0002593994, 0.52155304, -0.026885986)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0002593994, 0.49038124, -0.026885986)
 shape = SubResource("BoxShape3D_i0d58")

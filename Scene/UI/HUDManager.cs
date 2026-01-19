@@ -7,9 +7,11 @@ public partial class HUDManager : Control
 	private Label _placeTip;
 	private Label _rotateTip;
 	private Tween _fadeTween;
-	
+	private GpuParticles2D _screenStars;
 	public override void _Ready()
 	{
+		_screenStars = GetNode<GpuParticles2D>("ScreenStars");
+
 		_pickupTip = GetNode<Label>("VBoxContainer/PickupTip");
 		_placeTip = GetNode<Label>("VBoxContainer/PlaceTip");
 		_rotateTip = GetNode<Label>("VBoxContainer/RotateTip");
@@ -53,5 +55,41 @@ public partial class HUDManager : Control
 		tween.TweenProperty(node, "modulate:a", targetOpacity, 0.2f)
 			 .SetTrans(Tween.TransitionType.Quad)
 			 .SetEase(Tween.EaseType.Out);
+	}
+
+	public void PlayVictoryBurst()
+	{
+		if (_screenStars != null)
+		{
+			// Reset and Emit
+			_screenStars.Emitting = false;
+			_screenStars.Restart();
+			_screenStars.Emitting = true;            
+		}
+	}
+
+	public void UpdateZoneStatus(Label targetLabel, string zoneName, int current, int required, bool isDone)
+	{
+		if (targetLabel == null) return;
+
+		string status = isDone ? "[DONE]" : "[  ]";
+		targetLabel.Text = $"{status} {zoneName} ({current}/{required})";
+
+		// Give the text a little "nudge" color-wise
+		targetLabel.Modulate = isDone ? Colors.Green : Colors.White;
+
+		// Play a little scale animation
+		Tween tween = GetTree().CreateTween();
+		tween.TweenProperty(targetLabel, "scale", new Vector2(1.05f, 1.05f), 0.05f);
+		tween.TweenProperty(targetLabel, "scale", new Vector2(1.0f, 1.0f), 0.05f);
+	}
+	
+	private void ApplyBounceEffect(Label label)
+	{
+		// Makes the text "pop" slightly when it updates
+		Tween tween = GetTree().CreateTween();
+		tween.TweenProperty(label, "scale", new Vector2(1.1f, 1.1f), 0.1f);
+		tween.SetTrans(Tween.TransitionType.Back);
+		tween.TweenProperty(label, "scale", new Vector2(1.0f, 1.0f), 0.1f);
 	}
 }
