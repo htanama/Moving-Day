@@ -5,15 +5,16 @@ using System.Collections.Generic;
 public partial class PlacementZone : Area3D
 {
 	[Export] public Label MyChecklistLabel;
-	[Export] public string ZoneName = "Placement Area";
+	[Export] public string ZoneName;
 	[Export] public int RequiredItems = 3; // How many items do we need?
-	
+	public bool IsComplete { get; private set; } = false;
 	// We store a list of items currently in the zone
 	private List<RigidBody3D> _itemsInZone = new List<RigidBody3D>();
 	private bool _isGoalReached = false;
  	private GpuParticles3D _stars;
 	private AudioStreamPlayer3D _audio;
 	private HUDManager _hud;
+	
 	public override void _Ready()
 	{
 		_stars = GetNode<GpuParticles3D>("GPUParticles3D");
@@ -45,20 +46,19 @@ public partial class PlacementZone : Area3D
 	private void CheckCompletion()
 	{
 		int count = _itemsInZone.Count;
-		bool isComplete = count >= RequiredItems;
+		IsComplete = count >= RequiredItems;
 
-		// Tell the HUD to update ONLY my specific label
-		
+		// Tell the HUD to update ONLY my specific labels		
 		if (_hud != null && MyChecklistLabel != null)
 		{
-			_hud.UpdateZoneStatus(MyChecklistLabel, ZoneName, count, RequiredItems, isComplete);
+			_hud.UpdateZoneStatus(MyChecklistLabel, ZoneName, count, RequiredItems, IsComplete);
 		}
 
-		if (isComplete && !_isGoalReached)
+		if (IsComplete && !_isGoalReached)
 		{
 			TriggerVictory();
 		}
-		else if (!isComplete)
+		else if (!IsComplete)
 		{
 			_isGoalReached = false;
 		}
@@ -88,23 +88,5 @@ public partial class PlacementZone : Area3D
 		// _hud.ShowMessage("Counter Organized!");
 	}
 
-
-
-	// private void CheckCompletion()
-	// {
-	// 	int placedCount = _itemsInZone.Count;
-
-	// 	if (placedCount >= RequiredItems && _isGoalReached != true)
-	// 	{
-	// 		TriggerVictory();
-	// 	}
-
-	// 	else if (placedCount < RequiredItems)
-	// 	{
-	// 		_isGoalReached = false; // Reset if they take items away
-	// 	}
-
-	// 	GD.Print($"DEBUG: Items in zone: {_itemsInZone.Count} / {RequiredItems}");		
-		
-	// }
+	
 }

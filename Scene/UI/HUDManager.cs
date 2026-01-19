@@ -2,7 +2,13 @@ using Godot;
 using System;
 
 public partial class HUDManager : Control
-{
+{	
+	[ExportGroup("Level Completion Requirements")]
+	[Export] public Label LabelCounterArea;
+	[Export] public Label LabelCabinetArea;
+	[Export] public int TotalZonesRequired = 2; 
+
+	private int _completedZones = 0;
 	private Label _pickupTip;
 	private Label _placeTip;
 	private Label _rotateTip;
@@ -19,6 +25,10 @@ public partial class HUDManager : Control
 		_pickupTip.Modulate = new Color (1,1,1,0);
 		_placeTip.Modulate = new Color (1,1,1,0);
 		_rotateTip.Modulate = new Color (1,1,1,0);		
+
+		// Objective for the player and text will be override by another function.
+		LabelCounterArea.Text = "[ ] Stove and Counter Area (0/3)";
+		LabelCabinetArea.Text = "[ ] Cabinet Area (0/3)";
 	}
 
 	public void HideAllTips()
@@ -82,6 +92,29 @@ public partial class HUDManager : Control
 		Tween tween = GetTree().CreateTween();
 		tween.TweenProperty(targetLabel, "scale", new Vector2(1.05f, 1.05f), 0.05f);
 		tween.TweenProperty(targetLabel, "scale", new Vector2(1.0f, 1.0f), 0.05f);
+
+		CheckOverallVictory();
+	}
+	
+	private void CheckOverallVictory()
+	{
+		// We check all placement areas in the scene and to make sure the PlacementZone.cs is attached
+		var allAreas = GetTree().GetNodesInGroup("PlacementArea");
+		int finishedCount = 0;
+
+		foreach (Node node in allAreas)
+		{
+			// We check if the node has our script and if that script says it's done
+			if (node is PlacementZone zone && zone.IsComplete)
+			{
+				finishedCount++;
+			}
+		}
+
+		if (finishedCount >= TotalZonesRequired)
+		{
+			TriggerLevelVictory();
+		}
 	}
 	
 	private void ApplyBounceEffect(Label label)
@@ -91,5 +124,13 @@ public partial class HUDManager : Control
 		tween.TweenProperty(label, "scale", new Vector2(1.1f, 1.1f), 0.1f);
 		tween.SetTrans(Tween.TransitionType.Back);
 		tween.TweenProperty(label, "scale", new Vector2(1.0f, 1.0f), 0.1f);
+	}
+
+	private void TriggerLevelVictory()
+	{
+		PlayVictoryBurst();
+		
+		// You can add logic here to open a "Next Level" button 
+		// or show a big "KITCHEN ORGANIZED" message.
 	}
 }
