@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Moving-Day"
 run/main_scene="uid://bbrp50gdnmn2h"
-config/features=PackedStringArray("4.5", "C#", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]

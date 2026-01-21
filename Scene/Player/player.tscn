@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://of7lt7m4l0tj"]
 
-[ext_resource type="Script" uid="uid://bu0wslx4gxd1g" path="res://Scene/Player/Player.cs" id="1_uuj77"]
-[ext_resource type="Material" uid="uid://jmcrusigoa62" path="res://Scene/Materials/GhostMaterial.tres" id="2_88wa8"]
+[ext_resource type="Script" uid="uid://rmf5uyx2eh8r" path="res://Scene/Player/player.gd" id="1_uuj77"]
+[ext_resource type="Material" uid="uid://jmcrusigoa62" path="res://Assets/Materials/GhostMaterial.tres" id="2_88wa8"]
 [ext_resource type="PackedScene" uid="uid://b2e7x2fgqylow" path="res://Scene/Player/shadow_dot.tscn" id="2_yic5t"]
 [ext_resource type="PackedScene" uid="uid://c61t3ytggxx" path="res://Scene/Player/GhostPreview.tscn" id="3_uuj77"]
-[ext_resource type="AudioStream" uid="uid://chm2y1qu1wdut" path="res://Assets/Sounds/put_item.mp3" id="4_g0r71"]
+[ext_resource type="AudioStream" uid="uid://chm2y1qu1wdut" path="res://Assets/Audio/SFX/put_item.mp3" id="4_g0r71"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3amdw"]
 radius = 0.4
@@ -13,7 +13,7 @@ height = 1.8
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 4
 script = ExtResource("1_uuj77")
-GhostMaterial = ExtResource("2_88wa8")
+ghost_material = ExtResource("2_88wa8")
 
 [node name="ShadowDot" parent="." instance=ExtResource("2_yic5t")]
 

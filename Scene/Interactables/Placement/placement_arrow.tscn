@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://45netwy7fqxw"]
+
+[ext_resource type="Script" uid="uid://du4m1pyygxj8o" path="res://Scene/Interactables/Placement/PlacementArrow.gd" id="1_llf5c"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_47gxu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llf5c"]
+resource_local_to_scene = true
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+
+[node name="PlacementArrow" type="Node3D"]
+script = ExtResource("1_llf5c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.2, 9.059749e-08, 0, -3.019916e-08, -0.6, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("PrismMesh_47gxu")
+surface_material_override/0 = SubResource("StandardMaterial3D_llf5c")
