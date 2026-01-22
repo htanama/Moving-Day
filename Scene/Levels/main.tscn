@@ -28,16 +28,11 @@
 [ext_resource type="PackedScene" uid="uid://g65kwnuqxyvr" path="res://Scene/Props/kitchen_floor_tiles.tscn" id="24_jfg5e"]
 [ext_resource type="PackedScene" uid="uid://dfa0qloc6kc02" path="res://Scene/Props/small_decorated_cabinet.tscn" id="24_qxy0e"]
 [ext_resource type="PackedScene" uid="uid://dd5ofu5s3ym6" path="res://Scene/Interactables/UnpackingBoxBurst.tscn" id="28_m5fan"]
-[ext_resource type="PackedScene" uid="uid://fss4fdqhr0n3" path="res://Scene/Interactables/toaster.tscn" id="29_yuokn"]
-[ext_resource type="PackedScene" uid="uid://dfh0qp1y6j65w" path="res://Scene/Interactables/red_pan.tscn" id="30_6s00j"]
-[ext_resource type="PackedScene" uid="uid://b71amaoudns7f" path="res://Scene/Interactables/green_bowl.tscn" id="31_p48bc"]
-[ext_resource type="PackedScene" uid="uid://d1owkusp6bg82" path="res://Scene/Interactables/bottle_ketchup.tscn" id="32_vqwhc"]
-[ext_resource type="PackedScene" uid="uid://c4ijtei7tj5c3" path="res://Scene/Interactables/white_wine_bottle.tscn" id="33_8trg0"]
 [ext_resource type="PackedScene" uid="uid://taskf7ua7u6o" path="res://Scene/Interactables/wine_glass.tscn" id="34_k8cjt"]
 [ext_resource type="PackedScene" uid="uid://dkxajd1yxcc8r" path="res://Scene/Interactables/red_mug.tscn" id="35_xcgut"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1kdv"]
-albedo_color = Color(0.36227605, 0.26200852, 0.06439107, 1)
+[ext_resource type="PackedScene" uid="uid://ckhr0nnnibjrb" path="res://Scene/Props/computer.tscn" id="37_vqwhc"]
+[ext_resource type="PackedScene" uid="uid://dx5omugf6ravn" path="res://Scene/Props/midium_long_table.tscn" id="38_8trg0"]
+[ext_resource type="PackedScene" uid="uid://fqjmbhg6tejn" path="res://Scene/Props/chair_b_2.tscn" id="39_k8cjt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sblpm"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -51,6 +46,16 @@ background_mode = 2
 sky = SubResource("Sky_r34rm")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o7v0g"]
+albedo_color = Color(0.36078432, 0.2627451, 0.0627451, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dmoro"]
+material = SubResource("StandardMaterial3D_o7v0g")
+size = Vector3(20, 0.5, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yuokn"]
+size = Vector3(20, 0.5, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ar8pm"]
 size = Vector3(14.093674, 0.35001278, 1.3987715)
@@ -69,26 +74,29 @@ size = Vector3(1, 0.24707985, 4.0347595)
 
 [node name="Main" type="Node"]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2wwxx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.0008201599, 6.8604755, -0.0016336441)
+shadow_enabled = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" node_paths=PackedStringArray("label_zone_area") instance=ExtResource("1_8wjyx")]
 label_zone_area = NodePath("TextureRect/CheckListContainer/LabelZoneArea")
 
-[node name="Floor" type="CSGBox3D" parent="."]
+[node name="Floor" type="StaticBody3D" parent="." groups=["Floor"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0008201599, 0, -0.0016336441)
-material_override = SubResource("StandardMaterial3D_j1kdv")
-use_collision = true
-size = Vector3(20, 0.5, 20)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Floor"]
-environment = SubResource("Environment_2wwxx")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_dmoro")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Floor"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 6.8604755, 0)
-shadow_enabled = true
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_yuokn")
 
 [node name="Player" parent="." instance=ExtResource("1_j1kdv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.10000014, 6.962578)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.10000014, 5.5152326)
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_2l1ud")
@@ -375,7 +383,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65401864, 0)
 
 [node name="UnpackingBoxBurst" parent="." instance=ExtResource("28_m5fan")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5855384, 0.25, -4.1758857)
-contents = Array[PackedScene]([ExtResource("29_yuokn"), ExtResource("30_6s00j"), ExtResource("21_ckcy3"), ExtResource("31_p48bc"), ExtResource("32_vqwhc"), ExtResource("33_8trg0"), ExtResource("34_k8cjt"), ExtResource("35_xcgut"), ExtResource("35_xcgut"), ExtResource("35_xcgut"), ExtResource("21_ckcy3"), ExtResource("35_xcgut")])
+contents = Array[PackedScene]([ExtResource("35_xcgut"), ExtResource("35_xcgut"), ExtResource("35_xcgut"), ExtResource("34_k8cjt"), ExtResource("34_k8cjt")])
 
 [node name="PlacementArea2" parent="." node_paths=PackedStringArray("my_checklist_label") instance=ExtResource("19_qxy0e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.988054, 1.9046522, -2.2727056)
@@ -385,6 +393,57 @@ zone_name = "Cabient"
 [node name="CollisionShape3D" parent="PlacementArea2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7499864, 0)
 shape = SubResource("BoxShape3D_m5fan")
+
+[node name="Computer" parent="." instance=ExtResource("37_vqwhc")]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -6.623136, 1.264467, 8.341492)
+
+[node name="MidiumLongTable" parent="." instance=ExtResource("38_8trg0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6008186, 0.25, 8.40743)
+
+[node name="ChairB2" parent="." instance=ExtResource("39_k8cjt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.621011, 0.25, 6.7059813)
+
+[node name="WineGlass" parent="." instance=ExtResource("34_k8cjt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.888599, 1.2719727, -8.650388)
+
+[node name="WineGlass2" parent="." instance=ExtResource("34_k8cjt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.837131, 1.2719727, -8.623838)
+
+[node name="WineGlass3" parent="." instance=ExtResource("34_k8cjt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2108188, 1.2719727, -8.630207)
+
+[node name="WineGlass4" parent="." instance=ExtResource("34_k8cjt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.410108, 1.2719727, -8.842834)
+
+[node name="WineGlass5" parent="." instance=ExtResource("34_k8cjt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7064142, 1.2719727, -8.633333)
+
+[node name="WineGlass6" parent="." instance=ExtResource("34_k8cjt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17352316, 1.2719727, -8.4549465)
+
+[node name="RedMug" parent="." instance=ExtResource("35_xcgut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4741363, 1.2719727, -8.745216)
+
+[node name="RedMug2" parent="." instance=ExtResource("35_xcgut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3591706, 1.2719727, -8.605935)
+
+[node name="RedMug3" parent="." instance=ExtResource("35_xcgut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1758776, 1.2742326, -8.684367)
+
+[node name="RedMug5" parent="." instance=ExtResource("35_xcgut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9433787, 1.2719727, -8.564116)
+
+[node name="RedMug4" parent="." instance=ExtResource("35_xcgut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1424026, 1.2719526, -8.657844)
+
+[node name="RedMug6" parent="." instance=ExtResource("35_xcgut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.951499, 1.2719526, -8.553131)
+
+[node name="RedMug7" parent="." instance=ExtResource("35_xcgut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.678658, 1.2719526, -8.454176)
+
+[node name="RedMug8" parent="." instance=ExtResource("35_xcgut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4832735, 1.2719526, -8.639505)
 
 [editable path="CanvasLayer/HUD"]
 [editable path="PlacementArea"]

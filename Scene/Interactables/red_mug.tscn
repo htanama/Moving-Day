@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=4 uid="uid://dkxajd1yxcc8r"]
+[gd_scene load_steps=9 format=4 uid="uid://dkxajd1yxcc8r"]
 
 [ext_resource type="Texture2D" uid="uid://g1i80ons83v3" path="res://Assets/TinyCharmKitchen/gltf/tiny_treats_texture_1.png" id="1_d8i12"]
+[ext_resource type="Script" uid="uid://djs5iwjw2dxev" path="res://Scene/Interactables/Breakable.gd" id="1_ijjod"]
+[ext_resource type="PackedScene" uid="uid://cx4w5pqx1q786" path="res://Scene/Interactables/shatter_effect_orange.tscn" id="2_2eerl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d8i12"]
 resource_local_to_scene = true
@@ -53,6 +55,11 @@ radius = 0.1899414
 [node name="RedMug" type="RigidBody3D"]
 collision_layer = 2
 collision_mask = 3
+mass = 4.0
+contact_monitor = true
+max_contacts_reported = 5
+script = ExtResource("1_ijjod")
+broken_version = ExtResource("2_2eerl")
 
 [node name="VisualModel" type="MeshInstance3D" parent="."]
 material_overlay = SubResource("StandardMaterial3D_d8i12")

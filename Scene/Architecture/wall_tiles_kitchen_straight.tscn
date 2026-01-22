@@ -42,7 +42,7 @@ shadow_mesh = SubResource("ArrayMesh_nixru")
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dglg"]
 size = Vector3(2.0401306, 4.026245, 0.5390625)
 
-[node name="wall_tiles_kitchen_straight" type="StaticBody3D"]
+[node name="wall_tiles_kitchen_straight" type="StaticBody3D" groups=["Floor"]]
 
 [node name="wall_tiles_kitchen_straight" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_apv7t")
